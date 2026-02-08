@@ -7,16 +7,16 @@
 <style>
   :root{
     /* -- NEW PALETTE BASED ON LOGO -- */
-    --bg: #0D0221;           /* Deep Navy Background */
-    --card-bg: #160c2e;      /* Slightly lighter navy for cards */
-    --line: #2e2345;         /* Dark purple lines */
-    --muted: #8b80a8;        /* Lavender-grey for muted text */
+    --bg: #0D0221;            /* Deep Navy Background */
+    --card-bg: #160c2e;       /* Slightly lighter navy for cards */
+    --line: #2e2345;          /* Dark purple lines */
+    --muted: #8b80a8;         /* Lavender-grey for muted text */
     --white: #ffffff;
     
-    --accent: #C621CC;       /* Electric Purple */
+    --accent: #C621CC;        /* Electric Purple */
     --accent-glow: rgba(198, 33, 204, 0.4);
     
-    --red: #E91E63;          /* Vibrant Magenta/Red */
+    --red: #E91E63;           /* Vibrant Magenta/Red */
     --red-glow: rgba(233, 30, 99, 0.4);
     
     --gradient: linear-gradient(135deg, #E91E63 0%, #9D27B0 100%);
@@ -246,10 +246,11 @@
         <div style="margin-top:20px;">
           <input id="fileInput" type="file" accept=".pdf,.docx,.txt,.png,.jpg,.jpeg" />
         </div>
+        
         <div style="margin-top:20px; display:none;" id="urlBlock">
           <div style="display:flex; gap:8px;">
-            <input id="fileUrl" type="text" placeholder="https://example.com/file.pdf" style="flex:1;" />
-            <button id="loadUrlBtn" class="btn">Fetch</button>
+            <input id="fileUrl" type="text" placeholder="https://example.com/file.pdf" style="flex:1; min-width:0;" />
+            <button id="loadUrlBtn" class="btn" style="width: auto; flex: 0 0 auto; white-space: nowrap;">Fetch</button>
           </div>
         </div>
         <div class="small-muted" style="margin-top:12px;">Supports: PDF, DOCX, TXT, Images (OCR).</div>
