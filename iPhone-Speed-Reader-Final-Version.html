@@ -2,81 +2,141 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Speed Reader — Mobile Optimized</title>
+<title>Speed Reader — Clean Dark</title>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
 <style>
   :root{
-    --bg:#050505; --line:#333; --muted:#9a9a9a; --white:#e0e0e0; --accent:#2ea44f; --red:#ef476f; --box-selected:#222;
+    /* -- NEW PALETTE BASED ON IMAGE -- */
+    --bg: #050505;           /* Almost Pure Black */
+    --card-bg: #0a0a0a;      /* Very Dark Grey */
+    --line: #30363d;         /* Subtle Grey Borders */
+    --muted: #8b949e;        /* Standard Muted Text */
+    --white: #f0f6fc;        /* Off-white for better contrast */
+    
+    --accent: #2ea44f;       /* GitHub-style Green */
+    --accent-glow: transparent; /* Removed Glow */
+    
+    --red: #ff7b72;          /* Soft Red for ORP */
+    --red-glow: transparent; /* Removed Glow */
+    
+    --gradient: #238636;     /* Solid Green for Primary Buttons */
+    
     --word-font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
-  html,body{height:100%;margin:0;background:var(--bg);color:var(--white);font-family:var(--word-font); -webkit-text-size-adjust: 100%;}
-  .wrap{max-width:1000px;margin:0 auto;padding:18px;box-sizing:border-box;}
-  .card{background:#0a0a0a;border:1px solid #222;padding:24px;border-radius:12px;}
-  h1{margin:0 0 16px 0;font-weight:600;font-size:24px;letter-spacing:-0.5px;}
+
+  html, body { height:100%; margin:0; background:var(--bg); color:var(--white); font-family:var(--word-font); -webkit-text-size-adjust: 100%; }
+  .wrap { max-width:1000px; margin:0 auto; padding:18px; box-sizing:border-box; }
   
-  /* Upload Area */
-  .upload-box{border:1px dashed #444;background:rgba(255,255,255,0.02);padding:20px;text-align:center;color:var(--muted);margin-bottom:16px;border-radius:8px;}
-  label{color:var(--muted);font-size:13px;display:block;margin-top:12px;margin-bottom:4px;}
-  
-  /* INPUT STYLING - FIXED FOR IPHONE */
-  select, input[type=file], button, input[type=text] {
-    background:#151515; color:var(--white); border:1px solid #333;
-    padding:10px 12px; border-radius:6px; font-family:inherit;
-    font-size:14px; outline:none;
-    max-width: 100%; /* Prevents overflow */
-    box-sizing: border-box; /* Keeps padding inside width */
+  /* Cards - Flat Dark */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--line);
+    padding: 24px;
+    border-radius: 6px; /* Reduced radius for cleaner look */
+    box-shadow: none;
+  }
+
+  h1 { 
+    margin:0 0 16px 0; font-weight:600; font-size:24px; letter-spacing:-0.5px;
+    background: none;
+    -webkit-text-fill-color: initial;
+    color: var(--white);
   }
   
-  /* Specific Fix for File Input Line */
+  /* Upload Area */
+  .upload-box {
+    border: 1px dashed var(--line);
+    background: transparent;
+    padding: 24px;
+    text-align: center;
+    color: var(--muted);
+    margin-bottom: 20px;
+    border-radius: 6px;
+    transition: border-color 0.2s;
+  }
+  .upload-box:hover { border-color: var(--accent); }
+
+  label { color:var(--muted); font-size:13px; display:block; margin-top:12px; margin-bottom:4px; font-weight: 500;}
+  
+  /* Inputs & Selects - Dark Flat */
+  select, input[type=file], input[type=text], button {
+    background: #161b22;
+    color: var(--white);
+    border: 1px solid var(--line);
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-family: inherit; font-size: 14px; outline: none;
+    width: 100%; box-sizing: border-box;
+    transition: border-color 0.2s ease;
+    max-width: 100%;
+  }
+  
+  /* Specific Fix for File Input Line Overflow */
   input[type=file] {
     display: inline-block;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-
-  /* Prevent Zoom on iPhone by using 16px font on inputs */
-  @media screen and (max-width: 600px) {
-    select, input[type=file], button, input[type=text] {
-      font-size: 16px !important; 
-    }
-    .wrap { padding: 12px; }
-    .card { padding: 16px; }
-  }
-
-  select:focus,input:focus{border-color:var(--accent);}
   
-  .controls{display:flex;gap:12px;align-items:center;margin-top:20px;flex-wrap:wrap;}
+  select:focus, input:focus {
+    border-color: var(--accent);
+    box-shadow: none;
+  }
+  
+  .controls { display:flex; gap:12px; align-items:center; margin-top:24px; flex-wrap:wrap; }
   
   /* Table Layout */
-  .table-slim{width:100%;border-collapse:collapse;margin-top:12px;color:var(--muted);font-size:13px;border:1px solid #222;table-layout:fixed;}
-  .table-slim th{background:#111;padding:10px;border-bottom:1px solid #333;text-align:center;vertical-align:middle;}
-  .table-slim td{padding:10px;border-bottom:1px solid #222;text-align:center;vertical-align:middle;}
-  .table-slim th:first-child, .table-slim td:first-child{text-align:left;width:25%;padding-left:16px;color:#ccc;font-weight:bold;}
+  .table-slim { width:100%; border-collapse:collapse; border-spacing: 0; margin-top:12px; color:var(--muted); font-size:13px; border:1px solid var(--line); border-radius: 6px; overflow: hidden; table-layout: fixed;}
+  .table-slim th { background: #161b22; padding:10px; border-bottom:1px solid var(--line); text-align:center; color: var(--white);}
+  .table-slim td { padding:10px; border-bottom:1px solid var(--line); text-align:center; background: transparent; }
+  .table-slim th:first-child, .table-slim td:first-child { text-align:left; width:25%; padding-left:16px; font-weight:600; color: var(--white); }
+  .table-slim tr:last-child td { border-bottom: none; }
 
-  .small-muted{color:var(--muted);font-size:12px;margin-top:8px;line-height:1.4;}
+  .small-muted { color:var(--muted); font-size:12px; margin-top:8px; line-height:1.4; }
 
   /* Option Boxes */
-  .options-row{display:flex;gap:12px;margin-top:8px;justify-content:center;}
-  .option-box{display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:8px;border:1px solid #333;cursor:pointer;background:#111;transition:all 0.2s;}
-  .option-box:hover{border-color:#555;}
-  .option-box input{display:none;}
-  .option-box.selected{background:#222;border-color:var(--accent);color:var(--white);}
+  .options-row { display:flex; gap:12px; margin-top:8px; justify-content:center; }
+  .option-box {
+    display:flex; align-items:center; gap:8px; padding:8px 16px;
+    border-radius:6px; 
+    border:1px solid var(--line);
+    cursor:pointer; background:#161b22;
+    transition:all 0.2s;
+  }
+  .option-box:hover { border-color: var(--muted); }
+  .option-box input { display:none; }
+  
+  /* Selected State = Green Solid */
+  .option-box.selected {
+    background: #238636;
+    border-color: #238636;
+    color: #ffffff;
+    box-shadow: none;
+  }
 
   /* Progress Bar */
-  .progress-wrap{margin-top:20px;}
-  .progress-track{height:6px;background:#151515;border-radius:3px;overflow:hidden;border:1px solid #333;}
-  .progress-fill{height:100%;background:var(--accent);width:0%;transition:width 200ms ease-out;}
+  .progress-wrap { margin-top:20px; }
+  .progress-track { height:6px; background:#161b22; border-radius:3px; overflow:hidden; border:1px solid var(--line); }
+  .progress-fill { height:100%; background: var(--accent); width:0%; transition:width 200ms ease-out; box-shadow: none; }
 
   /* Reader Display */
-  .reader{min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;padding:40px 12px;}
-  .meta{position:absolute;right:18px;top:18px;color:var(--muted);font-size:14px;font-family:monospace;}
-  .line{width:100%;max-width:900px;height:2px;background:#222;position:relative;}
+  .reader {
+    min-height:70vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    position:relative; padding:40px 12px;
+    background: transparent;
+  }
+  .meta { position:absolute; right:18px; top:18px; color:var(--muted); font-size:14px; font-family:monospace; }
+  
+  .line { width:100%; max-width:900px; height:1px; background: var(--line); position:relative; }
   
   /* Guide Lines */
   .line::after { 
-    content:""; position:absolute; left:50%; top:-6px; width:2px; height:14px; 
-    background:#444; transform:translateX(-50%); 
+    content:""; position:absolute; left:50%; top:-8px; width:2px; height:18px; 
+    background: var(--line);
+    box-shadow: none; 
+    transform:translateX(-50%); 
     z-index: 10;
   }
 
@@ -91,29 +151,77 @@
     font-variant-numeric: tabular-nums;
     user-select: none;
     -webkit-user-select: none; /* iOS Safari support */
+    text-shadow: none;
   }
 
   /* Fixed Flex for Stability */
   .word-part { white-space: pre; }
-  .word-left { flex: 1 1 0; text-align: right; overflow: visible; }
-  .word-orp { color: var(--red); text-align: center; width: auto; min-width: 0.8ch; z-index: 2; }
-  .word-right { flex: 1 1 0; text-align: left; overflow: visible; }
+  .word-left { flex: 1 1 0; text-align: right; overflow: visible; opacity: 1; }
+  
+  /* The Pivot Character (ORP) */
+  .word-orp { 
+    color: var(--red); 
+    text-align: center; width: auto; min-width: 0.8ch; z-index: 2; 
+    text-shadow: none; 
+    font-weight: 600;
+  }
+  
+  .word-right { flex: 1 1 0; text-align: left; overflow: visible; opacity: 1; }
 
   /* Controls */
-  .controls-row{margin-top:30px;display:flex;gap:12px;}
-  .btn{background:#222;border:1px solid #333;color:#fff;padding:10px 20px;border-radius:6px;cursor:pointer;font-weight:500;transition:background 0.2s; touch-action: manipulation;}
-  .btn:hover:not(:disabled){background:#333;border-color:#555;}
-  .btn:disabled{opacity:0.5;cursor:not-allowed;}
-  .btn-primary{background:var(--accent);border-color:var(--accent);color:#fff;}
-  .btn-primary:hover:not(:disabled){background:#268a42;}
+  .controls-row { margin-top:30px; display:flex; gap:12px; }
+  
+  /* Buttons */
+  .btn {
+    background: #21262d;
+    border: 1px solid var(--line);
+    color: #c9d1d9;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    font-size: 14px;
+    touch-action: manipulation;
+  }
+  .btn:hover:not(:disabled) {
+    background: #30363d;
+    border-color: #8b949e;
+  }
+  .btn:disabled { opacity:0.5; cursor:not-allowed; }
+  
+  /* Primary Button - Green */
+  .btn-primary {
+    background: var(--gradient); /* Solid Green */
+    border: 1px solid rgba(240, 246, 252, 0.1);
+    color: #ffffff;
+    box-shadow: none;
+  }
+  .btn-primary:hover:not(:disabled) {
+    background: #2ea44f;
+    box-shadow: none;
+    transform: none;
+  }
 
-  .info{color:var(--muted);margin-top:16px;text-align:center;min-height:20px;}
-  footer{margin-top:40px;color:#444;font-size:12px;text-align:center;}
+  .info { color:var(--muted); margin-top:16px; text-align:center; min-height:20px; }
+  footer { margin-top:40px; color: #484f58; font-size:12px; text-align:center; }
 
   @media (max-width:600px){ 
-    .word-box{font-size:42px;} 
-    .controls-row{flex-wrap:wrap;justify-content:center;}
+    /* IPHONE ZOOM FIX: Force 16px font on inputs */
+    select, input[type=file], button, input[type=text] {
+      font-size: 16px !important; 
+    }
+    .word-box { font-size:42px; } 
+    .controls-row { flex-wrap:wrap; justify-content:center; }
+    .table-slim th, .table-slim td { padding: 6px; font-size: 11px; }
+    .card { padding: 16px; }
   }
+  
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 </style>
 
 <script src="https://unpkg.com/pdfjs-dist@3.8.162/build/pdf.min.js"></script>
@@ -129,52 +237,54 @@
       <h1>Speed Reader</h1>
 
       <div class="upload-box">
-        <div style="font-size:14px;margin-bottom:12px">Select Input Source</div>
+        <div style="font-size:14px;margin-bottom:12px; color: var(--white);">Select Input Source</div>
         <div class="options-row">
           <label id="optUpload" class="option-box selected"><input name="inputMode" type="radio" value="upload" checked />Upload File</label>
           <label id="optUrl" class="option-box"><input name="inputMode" type="radio" value="url" />From URL</label>
         </div>
-        <div style="margin-top:16px;">
+        <div style="margin-top:20px;">
           <input id="fileInput" type="file" accept=".pdf,.docx,.txt,.png,.jpg,.jpeg" />
         </div>
-        <div style="margin-top:16px;display:none;" id="urlBlock">
-          <input id="fileUrl" type="text" placeholder="https://example.com/file.pdf" style="width:70%" />
-          <button id="loadUrlBtn" class="btn">Fetch</button>
+        <div style="margin-top:20px; display:none;" id="urlBlock">
+          <div style="display:flex; gap:8px;">
+            <input id="fileUrl" type="text" placeholder="https://example.com/file.pdf" style="flex:1;" />
+            <button id="loadUrlBtn" class="btn">Fetch</button>
+          </div>
         </div>
-        <div class="small-muted">Supports: PDF, DOCX, TXT, Images (OCR).</div>
+        <div class="small-muted" style="margin-top:12px;">Supports: PDF, DOCX, TXT, Images (OCR).</div>
       </div>
 
-      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
         <div>
           <label>Language & Logic</label>
-          <select id="langSelect" style="width:100%">
+          <select id="langSelect">
             <option value="eng">English (LTR)</option>
             <option value="heb">Hebrew (RTL)</option>
           </select>
-          <div style="margin-top:12px; display:flex; flex-direction:column; gap:6px;">
-            <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;">
+          <div style="margin-top:12px; display:flex; flex-direction:column; gap:8px;">
+            <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;">
               <input type="checkbox" id="fixNumbersToggle"> Fix Jumbled Numbers
-              <span class="small-muted" style="margin:0 0 0 4px; color:var(--accent)">(Hebrew numbers order fix)</span>
+              <span class="small-muted" style="margin:0; color:var(--accent)">(Hebrew numbers order fix)</span>
             </label>
-            <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;">
+            <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;">
               <input type="checkbox" id="reverseDocToggle"> Fix: Words Shown in Reverse
             </label>
             <label style="display:none;">
               <input type="checkbox" id="glueDirToggle"> Glue Punctuation
             </label>
-             <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;">
+             <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;">
               <input type="checkbox" id="cleanPageNumsToggle" checked> Smart Clean Page Nums
-              <span class="small-muted" style="margin:0 0 0 4px; color:var(--accent)">(Auto-detect & hide)</span>
+              <span class="small-muted" style="margin:0; color:var(--accent)">(Auto-detect & hide)</span>
             </label>
           </div>
         </div>
         <div>
           <label>Target Speed</label>
-          <select id="wpmSelect" style="width:100%"></select>
+          <select id="wpmSelect"></select>
         </div>
       </div>
 
-      <div style="margin-top:16px;">
+      <div style="margin-top:24px;">
         <label>Reading Time Estimate (Pages per 10 mins)</label>
         <table class="table-slim" id="ppmTable">
           <thead><tr><th>Speed (WPM)</th><th>250 words/page</th><th>300 words/page</th></tr></thead>
@@ -182,33 +292,33 @@
         </table>
       </div>
 
-      <div class="page-controls" style="margin-top:16px;display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+      <div class="page-controls" style="margin-top:24px; display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
         <div>
           <label>Start Page</label>
-          <select id="startPageSelect" style="width:100%" disabled></select>
+          <select id="startPageSelect" disabled></select>
         </div>
         <div>
           <label>End Page</label>
-          <select id="stopPageSelect" style="width:100%" disabled><option value="">End of Doc</option></select>
+          <select id="stopPageSelect" disabled><option value="">End of Doc</option></select>
         </div>
       </div>
 
       <div class="progress-wrap" id="progressWrap" style="display:none;">
         <div class="progress-track"><div id="progressFill" class="progress-fill"></div></div>
-        <div id="progressText" class="small-muted" style="margin-top:6px; text-align:right;">initializing...</div>
+        <div id="progressText" class="small-muted" style="margin-top:6px; text-align:right; color: var(--accent);">initializing...</div>
       </div>
 
       <div class="controls">
-        <button id="parseBtn" class="btn btn-primary">1. Parse Document</button>
-        <button id="startReaderBtn" class="btn" disabled>2. Open Reader</button>
-        <button id="resetBtn" class="btn" style="margin-left:auto">Reset</button>
+        <button id="parseBtn" class="btn btn-primary" style="flex: 2;">1. Parse Document</button>
+        <button id="startReaderBtn" class="btn" disabled style="flex: 2;">2. Open Reader</button>
+        <button id="resetBtn" class="btn" style="flex: 1;">Reset</button>
       </div>
-      <div id="parsedInfo" style="margin-top:12px; font-size:14px;"></div>
+      <div id="parsedInfo" style="margin-top:16px; font-size:14px; text-align:center;"></div>
     </div>
 
     <div id="readerCard" class="card" style="display:none;">
       <div class="reader">
-        <div class="meta"><span id="currentWpm">200</span> WPM</div>
+        <div class="meta"><span id="currentWpm" style="color:var(--white); font-weight:bold;">200</span> <span style="color:var(--accent)">WPM</span></div>
         <div class="line"></div>
         
         <div class="word-box">
@@ -439,7 +549,7 @@ $('parseBtn').addEventListener('click', async ()=>{
       const o2=document.createElement('option'); o2.value=p.pageNumber; o2.textContent=p.pageNumber; stop.appendChild(o2); 
     }
     const count = parsedPages.reduce((a,p)=>a+(p.words?.length||0),0);
-    $('parsedInfo').innerHTML = `<div style="color:#2ea44f">✅ Parsed ${parsedPages.length} pages (${count} words).</div>`;
+    $('parsedInfo').innerHTML = `<div style="color:var(--accent); text-shadow:0 0 5px var(--accent-glow)">✅ Parsed ${parsedPages.length} pages (${count} words).</div>`;
     $('startReaderBtn').disabled=false; $('startReaderBtn').dataset.fileId=fileId; $('startPageSelect').disabled=false; $('stopPageSelect').disabled=false;
   }catch(err){ console.error(err); alert('Error: ' + err.message); } finally{ $('parseBtn').disabled=false; }
 });
